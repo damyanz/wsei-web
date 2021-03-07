@@ -1,46 +1,100 @@
 var App = /** @class */ (function () {
     function App() {
+        this.inputCount = 4;
+        this.inputs = [];
+        this.outputs = [];
         this.init();
     }
     App.prototype.init = function () {
         this.getControls();
-        this.initListeners();
         this.generateInputs();
     };
-    App.prototype.generateInputs = function () {
-        var inputListWrapper = document.querySelector("#inputList");
-        inputListWrapper.innerHTML = "";
-        for (var i = 0; i < this.inputCount; i++) {
-            var listItem = document.createElement("li");
-            listItem.appendChild(this.createInput());
-            inputListWrapper.appendChild(listItem);
+    App.prototype.popInputs = function (count) {
+        for (var i = 0; i < -count; i++) {
+            this.inputs.pop();
+            this.inputListWrapper.lastChild.remove();
         }
-        this.inputs = inputListWrapper.children;
+    };
+    App.prototype.pushInputs = function (count) {
+        for (var i = 0; i < count; i++) {
+            var inputElement = this.createInput();
+            var listItem = document.createElement("li");
+            listItem.appendChild(inputElement);
+            this.inputListWrapper.appendChild(listItem);
+            this.inputs.push(inputElement);
+        }
+    };
+    App.prototype.generateInputs = function () {
+        var generateCount = this.inputCount - this.inputs.length;
+        if (generateCount < 0) {
+            this.popInputs(generateCount);
+        }
+        else {
+            this.pushInputs(generateCount);
+        }
+        this.initListeners();
+        this.calculate();
     };
     App.prototype.createInput = function () {
         var valueInput = document.createElement("input");
         valueInput.type = "number";
-        valueInput.value;
+        valueInput.value = "1";
         return valueInput;
     };
     App.prototype.getControls = function () {
         this.countInput = document.querySelector("#countInput");
         this.countBtn = document.querySelector("#countBtn");
+        this.inputListWrapper = document.querySelector("#inputList");
+        this.sumOutput = document.querySelector("#sum");
+        this.avgOutput = document.querySelector("#avg");
+        this.minOutput = document.querySelector("#min");
+        this.maxOutput = document.querySelector("#max");
+    };
+    App.prototype.handleChange = function (e) {
+        var target = e.target;
+        var value = target.value;
+        if (!this.isValueValid(value)) {
+            target.value = "1";
+        }
+        this.calculate();
     };
     App.prototype.initListeners = function () {
         var _this = this;
         this.countBtn.addEventListener("click", function () { return _this.setInputCount(); });
+        this.inputs.forEach(function (input) {
+            return input.addEventListener("change", function (e) { return _this.handleChange(e); });
+        });
+    };
+    App.prototype.getValues = function () {
+        return this.inputs.map(function (input) { return +input.value; });
+    };
+    App.prototype.calculate = function () {
+        var values = this.getValues();
+        var sum = values.reduce(function (a, b) { return a + b; });
+        var avg = sum / this.inputs.length;
+        var min = Math.min.apply(Math, values);
+        var max = Math.max.apply(Math, values);
+        this.setResult(this.sumOutput, sum);
+        this.setResult(this.avgOutput, avg);
+        this.setResult(this.minOutput, min);
+        this.setResult(this.maxOutput, max);
     };
     App.prototype.setInputCount = function () {
         if (!this.isValueValid(this.countInput.value)) {
-            alert("Provided value is not a valid number! Try again.");
-            return;
+            this.countInput.value = "1";
         }
         this.inputCount = +this.countInput.value;
         this.generateInputs();
     };
+    App.prototype.setResult = function (output, result) {
+        output.value = "" + result;
+    };
     App.prototype.isValueValid = function (value) {
-        return !isNaN(+value) && +value > 0;
+        var isValid = !isNaN(+value) && +value > 0;
+        if (!isValid) {
+            alert("Provided value is not a valid number!");
+        }
+        return isValid;
     };
     return App;
 }());
