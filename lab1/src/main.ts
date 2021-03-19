@@ -26,9 +26,13 @@ class App {
   }
   pushInputs(count: number) {
     for (let i: number = 0; i < count; i++) {
+      const randomRef = Math.random();
       const inputElement: HTMLInputElement = this.createInput();
+      inputElement.dataset.ref = `input-${randomRef}`;
+      const removeButtonElement: HTMLButtonElement = this.createRemoveButton();
       const listItem: HTMLLIElement = document.createElement("li");
       listItem.appendChild(inputElement);
+      listItem.appendChild(removeButtonElement);
       this.inputListWrapper.appendChild(listItem);
       this.inputs.push(inputElement);
     }
@@ -48,6 +52,24 @@ class App {
     valueInput.type = "number";
     valueInput.value = "1";
     return valueInput;
+  }
+  createRemoveButton(): HTMLButtonElement {
+    const removeButton: HTMLButtonElement = document.createElement("button");
+    removeButton.innerHTML = "❌";
+    removeButton.addEventListener("click", (e) => this.handleRemoval(e));
+    return removeButton;
+  }
+  handleRemoval(e: Event) {
+    if (this.inputs.length === 1) return;
+    const target = <HTMLButtonElement>e.target;
+    const siblingInput = <HTMLInputElement>target.previousSibling;
+    const siblingRef: String = siblingInput.dataset.ref;
+    const newInputs = this.inputs.filter(
+      (input) => input.dataset.ref !== siblingRef
+    );
+    this.inputs = newInputs;
+    target.parentElement.remove();
+    this.calculate();
   }
   getControls() {
     this.countInput = document.querySelector("#countInput");

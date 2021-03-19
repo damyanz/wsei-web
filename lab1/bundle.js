@@ -17,9 +17,13 @@ var App = /** @class */ (function () {
     };
     App.prototype.pushInputs = function (count) {
         for (var i = 0; i < count; i++) {
+            var randomRef = Math.random();
             var inputElement = this.createInput();
+            inputElement.dataset.ref = "input-" + randomRef;
+            var removeButtonElement = this.createRemoveButton();
             var listItem = document.createElement("li");
             listItem.appendChild(inputElement);
+            listItem.appendChild(removeButtonElement);
             this.inputListWrapper.appendChild(listItem);
             this.inputs.push(inputElement);
         }
@@ -40,6 +44,24 @@ var App = /** @class */ (function () {
         valueInput.type = "number";
         valueInput.value = "1";
         return valueInput;
+    };
+    App.prototype.createRemoveButton = function () {
+        var _this = this;
+        var removeButton = document.createElement("button");
+        removeButton.innerHTML = "❌";
+        removeButton.addEventListener("click", function (e) { return _this.handleRemoval(e); });
+        return removeButton;
+    };
+    App.prototype.handleRemoval = function (e) {
+        if (this.inputs.length === 1)
+            return;
+        var target = e.target;
+        var siblingInput = target.previousSibling;
+        var siblingRef = siblingInput.dataset.ref;
+        var newInputs = this.inputs.filter(function (input) { return input.dataset.ref !== siblingRef; });
+        this.inputs = newInputs;
+        target.parentElement.remove();
+        this.calculate();
     };
     App.prototype.getControls = function () {
         this.countInput = document.querySelector("#countInput");
@@ -99,4 +121,3 @@ var App = /** @class */ (function () {
     return App;
 }());
 var app = new App();
-//# sourceMappingURL=bundle.js.map

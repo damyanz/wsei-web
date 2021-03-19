@@ -6,5 +6,6 @@
     "outFile": "./bundle.js"
   },
   "include": ["src/*.ts"],
-  "exclude": []
+  "exclude": [],
+  "strict": true
 }
