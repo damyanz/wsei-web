@@ -1,0 +1,41 @@
+#main{
+    display: flex;
+    flex-direction: column;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#controlsWrapper{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.control{
+    display: flex;
+    flex-shrink: 0;
+    width: 150px;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+    background-color:dodgerblue;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-size: 1.5rem;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition-property: transform;
+    transition-duration: 100ms;
+    border-radius: 7px;
+}
+
+.control:hover{
+    transform: scale(1.05);
+}
+
+.control:active{
+    transform: scale(0.85);
+}
