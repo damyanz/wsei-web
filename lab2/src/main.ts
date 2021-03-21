@@ -55,11 +55,19 @@ const SOUNDS: Sound[] = [
 function initApp() {
   createAudioElements();
   createControls();
+  addKeyListener();
 }
+
+const AudioControls = {};
 
 function createAudioElements(): void {
   const wrapper: HTMLDivElement = document.querySelector("#audioWrapper");
-  SOUNDS.forEach((sound: Sound) => wrapper.appendChild(getAudioElement(sound)));
+  SOUNDS.forEach((sound: Sound) => {
+    const audioEl = getAudioElement(sound);
+    wrapper.appendChild(audioEl);
+    AudioControls[sound.key] = audioEl;
+  });
+  console.log(AudioControls);
 }
 
 function createControls(): void {
@@ -67,6 +75,14 @@ function createControls(): void {
   SOUNDS.forEach((sound: Sound) =>
     wrapper.appendChild(getControlElement(sound))
   );
+}
+
+function addKeyListener(): void {
+  document.addEventListener("keypress", handleKeyPress);
+}
+
+function handleKeyPress(e: KeyboardEvent): void {
+  AudioControls[e.key].play();
 }
 
 function getControlElement({ name, src, key }: Sound): HTMLButtonElement {
