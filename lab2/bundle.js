@@ -50,34 +50,59 @@ function initApp() {
     createControls();
     addKeyListener();
 }
-var AudioControls = {};
+var AudioControls = {
+    elements: {},
+    controls: {}
+};
 function createAudioElements() {
     var wrapper = document.querySelector("#audioWrapper");
     SOUNDS.forEach(function (sound) {
         var audioEl = getAudioElement(sound);
         wrapper.appendChild(audioEl);
-        AudioControls[sound.key] = audioEl;
+        AudioControls.elements[sound.key] = audioEl;
     });
-    console.log(AudioControls);
 }
 function createControls() {
     var wrapper = document.querySelector("#controlsWrapper");
     SOUNDS.forEach(function (sound) {
-        return wrapper.appendChild(getControlElement(sound));
+        var controlElement = getControlElement(sound);
+        wrapper.appendChild(controlElement);
+        AudioControls.controls[sound.key] = controlElement;
     });
 }
 function addKeyListener() {
     document.addEventListener("keypress", handleKeyPress);
 }
 function handleKeyPress(e) {
-    AudioControls[e.key].play();
+    var key = e.key.toLowerCase();
+    var element = AudioControls.elements[key];
+    if (element) {
+        playSound(element);
+        simulateControlClick(key);
+    }
+}
+function playSound(element) {
+    element.currentTime = 0;
+    element.play();
+}
+function simulateControlClick(key) {
+    var control = AudioControls.controls[key];
+    control.classList.add("control--active");
+    setTimeout(function () {
+        control.classList.remove("control--active");
+    }, 100);
 }
 function getControlElement(_a) {
     var name = _a.name, src = _a.src, key = _a.key;
     var el = document.createElement("button");
-    el.innerText = name;
+    var elLabel = "\n  <span class=\"audioKey\">" + key + "</span>\n  <span class=\"audioName\">" + name + "</span>\n  ";
+    el.innerHTML = elLabel;
     el.classList.add("control");
+    el.addEventListener("click", function () { return handleControlClick(key); });
     return el;
+}
+function handleControlClick(key) {
+    playSound(AudioControls.elements[key]);
 }
 function getAudioElement(_a) {
     var name = _a.name, src = _a.src, key = _a.key;
