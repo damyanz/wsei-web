@@ -3,6 +3,7 @@
     flex-direction: column;
     max-width: 900px;
     margin: 0 auto;
+    padding: 50px 0;
 }
 
 #controlsWrapper{
@@ -51,4 +52,83 @@
 .control .audioName{
     margin-top: 10px;
     color: lightgray;
+}
+
+#tracksWrapper{
+    margin-top: 75px;
+}
+
+.trackWrapper{
+    display: flex;
+    align-items: baseline;
+}
+
+.track{
+    display: flex;
+    width: 100%;
+    height: 3px;
+    background: gray;
+    border-radius: 5px;
+    margin: 30px 0;
+}
+
+.controlsWrapper{
+    display: flex;
+}
+
+.muteIcon{
+    content: url("./assets/icons/mute.svg");
+    display: flex;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    color: red;
+    margin: auto 15px;
+    opacity: 25%;
+    transition: 200ms opacity;
+    cursor: pointer;
+}
+
+.muteIcon--muted{
+    opacity: 100%;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    margin-right: 10px;
+    transition: all 200ms;
+    color: white;
+    cursor: pointer;
+}
+
+.button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1), 0 2px 5px 0 rgba(0, 0, 0, 0.06);
+}
+
+.button:active {
+    opacity: 75%;
+}
+
+.playButton {
+    background-color: dodgerblue;
+}
+
+.recordButton{
+    background-color: red;
+    opacity: 50%;
+}
+
+.recordButton--recording{
+    opacity: 100%;
+}
+
+#playAll{
+    margin: 20px auto;
+    background-color: green;
 }

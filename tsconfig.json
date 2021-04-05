@@ -7,5 +7,6 @@
   },
   "include": ["src/*.ts"],
   "exclude": [],
-  "strict": true
+  "strict": true,
+  "lib": ["ES2015"]
 }
