@@ -28,12 +28,12 @@ const SOUNDS: Sound[] = [
   {
     name: "openhat",
     src: "openhat.wav",
-    key: "t",
+    key: "c",
   },
   {
     name: "ride",
     src: "ride.wav",
-    key: "y",
+    key: "n",
   },
   {
     name: "snare",
@@ -90,7 +90,7 @@ class Track {
     playButton.innerText = "ODTWORZ";
     playButton.addEventListener("click", (e) => {
       if (this.memory.length > 0) {
-        if (!this.isPlaying) {
+        if (!this.isPlaying && !this.isMuted) {
           this.playRecording();
         }
       }
@@ -124,7 +124,6 @@ class Track {
     trackWrapper.appendChild(trackControls);
     trackWrapper.appendChild(el);
     wrapper.appendChild(trackWrapper);
-
     this.trackElement = el;
   }
   clearMemory(): void {
@@ -153,14 +152,14 @@ class Track {
   playRecording(): void {
     this.isPlaying = true;
     this.runTrackProgress();
-    this.memory.forEach((soundData: SoundData, soundIndex, soundsArr) => {
+    this.memory.forEach((soundData: SoundData) => {
       setTimeout(() => {
         playSound(soundData.audioElement);
       }, soundData.recordTime);
     });
   }
   runTrackProgress(): void {
-    const interval = 1000 / 60;
+    const interval: number = 1000 / 60;
     const progressInterval = setInterval(() => {
       this.currentProgress =
         this.currentProgress + (interval / this.duration) * 100;
@@ -231,7 +230,7 @@ function addKeyListener(): void {
 
 function handleKeyPress(e: KeyboardEvent): void {
   const key: string = e.key.toLowerCase();
-  const element = AudioControls.elements[key];
+  const element: HTMLAudioElement = AudioControls.elements[key];
   if (element) {
     playSound(element);
     simulateControlClick(key);
@@ -261,7 +260,7 @@ function simulateControlClick(key: string): void {
 }
 
 function getControlElement({ name, src, key }: Sound): HTMLButtonElement {
-  const el = document.createElement("button");
+  const el: HTMLButtonElement = document.createElement("button");
   const elLabel = `
   <span class="audioKey">${key}</span>
   <span class="audioName">${name}</span>
@@ -277,7 +276,7 @@ function handleControlClick(key: string): void {
 }
 
 function getAudioElement({ name, src, key }: Sound): HTMLAudioElement {
-  const el = document.createElement("audio");
+  const el: HTMLAudioElement = document.createElement("audio");
   el.src = `./assets/sounds/${src}`;
   el.dataset.name = name;
   el.dataset.key = key;
@@ -287,8 +286,8 @@ function getAudioElement({ name, src, key }: Sound): HTMLAudioElement {
 function handlePlayAllButton(): void {
   const btn: HTMLButtonElement = document.querySelector("#playAll");
   btn.addEventListener("click", () => {
-    tracks.forEach((track) => {
-      if (!track.isMuted) {
+    tracks.forEach((track: Track) => {
+      if (!track.isMuted && !track.isPlaying) {
         track.playRecording();
       }
     });

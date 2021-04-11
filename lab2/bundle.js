@@ -22,12 +22,12 @@ var SOUNDS = [
     {
         name: "openhat",
         src: "openhat.wav",
-        key: "t"
+        key: "c"
     },
     {
         name: "ride",
         src: "ride.wav",
-        key: "y"
+        key: "n"
     },
     {
         name: "snare",
@@ -75,7 +75,7 @@ var Track = /** @class */ (function () {
         playButton.innerText = "ODTWORZ";
         playButton.addEventListener("click", function (e) {
             if (_this.memory.length > 0) {
-                if (!_this.isPlaying) {
+                if (!_this.isPlaying && !_this.isMuted) {
                     _this.playRecording();
                 }
             }
@@ -135,7 +135,7 @@ var Track = /** @class */ (function () {
     Track.prototype.playRecording = function () {
         this.isPlaying = true;
         this.runTrackProgress();
-        this.memory.forEach(function (soundData, soundIndex, soundsArr) {
+        this.memory.forEach(function (soundData) {
             setTimeout(function () {
                 playSound(soundData.audioElement);
             }, soundData.recordTime);
@@ -257,7 +257,7 @@ function handlePlayAllButton() {
     var btn = document.querySelector("#playAll");
     btn.addEventListener("click", function () {
         tracks.forEach(function (track) {
-            if (!track.isMuted) {
+            if (!track.isMuted && !track.isPlaying) {
                 track.playRecording();
             }
         });
