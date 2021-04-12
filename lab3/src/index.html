@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pogodynka</title>
+  </head>
+  <body
+    class="min-h-screen flex flex-1 bg-gradient-to-r from-[#56CCF2] to-[#2F80ED]"
+  >
+    <main class="flex flex-col items-start flex-1 pt-16">
+      <!-- SEARCHBOX -->
+      <div
+        class="relative flex flex-col w-full max-w-3xl p-10 mx-auto overflow-hidden text-gray-800 bg-gray-100 shadow-lg center rounded-xl min-w-80"
+      >
+        <div class="flex w-fill">
+          <input
+            type="search"
+            id="phrase"
+            class="w-full py-2 pl-3 pr-10 transition-colors border-2 border-gray-200 rounded-xl hover:border-gray-300 focus:outline-none focus:border-blue-500"
+            placeholder="Wpisz nazwę miejscowości..."
+          />
+          <button
+            id="searchSubmit"
+            type="submit"
+            disabled
+            class="px-8 py-2 m-1 text-white transition-colors duration-200 bg-red-600 border-b-4 border-red-900 shadow-lg rounded-xl disabled:bg-gray-400 disabled:border-gray-700 disabled:cursor-auto"
+          >
+            Dodaj
+          </button>
+        </div>
+        <span id="error" class="font-medium text-red-600"></span>
+      </div>
+      <!-- /SEARCHBOX -->
+      <section
+        class="flex flex-wrap justify-center flex-1 w-full px-24 pt-5 space-x-10"
+        id="cardsWrapper"
+      >
+        <!-- WEATHERCARD -->
+
+        <!-- /WEATHERCARD -->
+      </section>
+    </main>
+    <script src="index.js"></script>
+  </body>
+</html>

@@ -192,8 +192,19 @@ function initApp() {
   addKeyListener();
   handlePlayAllButton();
 }
+interface ElementsType {
+  [key: string]: HTMLAudioElement;
+}
 
-const AudioControls = {
+interface ControlsType {
+  [key: string]: HTMLButtonElement;
+}
+interface AudioControlsType {
+  elements: ElementsType;
+  controls: ControlsType;
+}
+
+const AudioControls: AudioControlsType = {
   elements: {},
   controls: {},
 };
