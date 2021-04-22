@@ -15,8 +15,8 @@ export class App {
     this.loadFromStorage();
   }
 
-  async getCityInfo(city: string) {
-    const weather = await this.getWeather(city);
+  async getCityInfo(city: string): Promise<WeatherProps> {
+    const weather: any = await this.getWeather(city);
     if (!weather.name) {
       return null;
     }
@@ -39,14 +39,15 @@ export class App {
     };
     return cardData;
   }
+
   async getWeather(city: string): Promise<any> {
-    const openWeatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.opwApiKey}&units=metric`;
-    const weatherResponse = await fetch(openWeatherUrl);
-    const weatherData = await weatherResponse.json();
+    const reqUrl: string = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.opwApiKey}&units=metric`;
+    const res: any = await fetch(reqUrl);
+    const weatherData: any = await res.json();
     return weatherData;
   }
 
-  async handleSubmit() {
+  async handleSubmit(): Promise<void> {
     const cardData: WeatherProps = await this.getCityInfo(this.inputValue);
     if (!cardData) {
       this.setError("Nie znaleziono miejscowości. Spróbuj ponownie.");
@@ -61,37 +62,36 @@ export class App {
     this.createCard(cardData);
   }
 
-  generateCards() {
+  generateCards(): void {
     this.cities.forEach(async (city) => {
       const data = await this.getCityInfo(city);
       this.createCard(data);
     });
   }
 
-  loadFromStorage() {
-    const cities = localStorage.getItem("cities");
+  loadFromStorage(): void {
+    const cities: string = localStorage.getItem("cities");
     if (cities) {
       this.cities = JSON.parse(cities);
       this.generateCards();
     }
   }
 
-  saveInStorage() {
+  saveInStorage(): void {
     localStorage.setItem("cities", JSON.stringify(this.cities));
   }
 
-  setError(message: string) {
-    console.log(this.input.classList);
+  setError(message: string): void {
     this.input.classList.add("text-red-600", "border-red-600");
     this.errorSpan.innerText = message;
   }
 
-  clearError() {
+  clearError(): void {
     this.input.classList.remove("text-red-600", "border-red-600");
     this.errorSpan.innerText = "";
   }
 
-  addControlsListeners() {
+  addControlsListeners(): void {
     this.input.addEventListener("input", (e) => {
       this.inputValue = (<HTMLInputElement>e.target).value;
       this.clearError();
@@ -104,21 +104,12 @@ export class App {
     this.submitButton.addEventListener("click", () => this.handleSubmit());
   }
 
-  saveData(data: any) {
+  saveData(data: any): void {
     localStorage.setItem("weatherData", JSON.stringify(data));
   }
 
-  getData() {
-    const data = localStorage.getItem("weatherData");
-    if (data) {
-      return JSON.parse(data);
-    } else {
-      return {};
-    }
-  }
-
-  createCard(data: WeatherProps) {
+  createCard(data: WeatherProps): void {
     const w1: WeatherCard = new WeatherCard(data);
-    this.cardsWrapper.appendChild(w1.render(data));
+    this.cardsWrapper.appendChild(w1.render());
   }
 }
