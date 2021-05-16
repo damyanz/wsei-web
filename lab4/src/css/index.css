@@ -1,0 +1,243 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+#body {
+  display: flex;
+  justify-content: center;
+  background-color: #202124;
+  color: white;
+  padding: 0;
+  margin: 0;
+  font-family: "Lato";
+}
+
+.main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  max-width: 1200px;
+  min-height: 100vh;
+  padding: 50px;
+}
+
+.heading--main {
+  font-weight: 900;
+  font-size: 2rem;
+}
+.heading--section {
+  font-weight: 700;
+  font-size: 1.75rem;
+}
+.heading--note {
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  max-width: 90%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#pinned {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0;
+}
+
+.notesWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-flow: "row";
+  gap: 15px;
+  padding: 20px 0;
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: " 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);";
+  color: black;
+  padding: 20px 15px;
+  border-radius: 3px;
+  font-weight: 500;
+  position: relative;
+}
+.note .pinButton {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+}
+.note .pinButton svg {
+  width: 32px;
+  height: 32px;
+}
+.note .removeButton {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  font-size: 0.75rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  left: -12px;
+  top: -12px;
+  transition: filter 200ms;
+  filter: grayscale(1);
+  cursor: pointer;
+}
+.note .removeButton:hover {
+  filter: grayscale(0);
+}
+.note .content {
+  padding-bottom: 20px;
+  line-height: 1.125rem;
+}
+.note .info {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  color: gray;
+  font-size: 0.75rem;
+}
+
+/*# sourceMappingURL=index.css.map */
