@@ -1,7 +1,12 @@
 @import "./reset.scss";
 
-$body: #202124;
+$body: #334155;
 $shadow: " 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);";
+
+button {
+  border: none;
+  background: none;
+}
 
 #body {
   display: flex;
@@ -18,8 +23,23 @@ $shadow: " 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);";
   flex: 1;
   flex-direction: column;
   max-width: 1200px;
-  min-height: 100vh;
   padding: 50px;
+}
+
+.noteHeadingWrapper {
+  display: flex;
+  align-items: center;
+
+  #add_note {
+    width: 24px;
+    height: 24px;
+    margin-left: 10px;
+    opacity: 0.75;
+    cursor: pointer;
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 
 .heading {
@@ -57,6 +77,26 @@ $shadow: " 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);";
   padding: 20px 0;
 }
 
+.removeButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  font-size: 0.75rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  transition: filter 200ms;
+  filter: grayscale(1);
+  cursor: pointer;
+
+  &:hover {
+    filter: grayscale(0);
+  }
+}
+
 .note {
   display: flex;
   flex-direction: column;
@@ -69,37 +109,43 @@ $shadow: " 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);";
   position: relative;
 
   .pinButton {
+    cursor: pointer;
     position: absolute;
     top: 10px;
     right: 5px;
 
     svg {
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
+      fill: none;
+    }
+
+    &:hover {
+      svg {
+        fill: #000;
+        opacity: 0.5;
+      }
+    }
+
+    &.pinned {
+      svg {
+        width: 24px;
+        height: 24px;
+        fill: #000;
+      }
+      &:hover {
+        svg {
+          opacity: 0.5;
+        }
+      }
     }
   }
 
   .removeButton {
+    @extend .removeButton;
     position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 900;
-    font-size: 0.75rem;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: red;
-    color: white;
     left: -12px;
     top: -12px;
-    transition: filter 200ms;
-    filter: grayscale(1);
-    cursor: pointer;
-
-    &:hover {
-      filter: grayscale(0);
-    }
   }
 
   .content {
@@ -113,5 +159,40 @@ $shadow: " 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);";
     left: 15px;
     color: gray;
     font-size: 0.75rem;
+  }
+}
+
+.modalWrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.modal {
+  width: 500px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  background-color: #fff;
+  opacity: 1;
+  border-radius: 10px;
+  position: relative;
+
+  .closeButton {
+    @extend .removeButton;
+    position: absolute;
+    right: 12px;
+    top: 12px;
   }
 }

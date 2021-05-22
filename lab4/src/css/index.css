@@ -135,10 +135,15 @@ table {
   border-spacing: 0;
 }
 
+button {
+  border: none;
+  background: none;
+}
+
 #body {
   display: flex;
   justify-content: center;
-  background-color: #202124;
+  background-color: #334155;
   color: white;
   padding: 0;
   margin: 0;
@@ -150,8 +155,22 @@ table {
   flex: 1;
   flex-direction: column;
   max-width: 1200px;
-  min-height: 100vh;
   padding: 50px;
+}
+
+.noteHeadingWrapper {
+  display: flex;
+  align-items: center;
+}
+.noteHeadingWrapper #add_note {
+  width: 24px;
+  height: 24px;
+  margin-left: 10px;
+  opacity: 0.75;
+  cursor: pointer;
+}
+.noteHeadingWrapper #add_note:hover {
+  opacity: 1;
 }
 
 .heading--main {
@@ -187,6 +206,25 @@ table {
   padding: 20px 0;
 }
 
+.removeButton, .modal .closeButton, .note .removeButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  font-size: 0.75rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  transition: filter 200ms;
+  filter: grayscale(1);
+  cursor: pointer;
+}
+.removeButton:hover, .modal .closeButton:hover {
+  filter: grayscale(0);
+}
+
 .note {
   display: flex;
   flex-direction: column;
@@ -199,34 +237,32 @@ table {
   position: relative;
 }
 .note .pinButton {
+  cursor: pointer;
   position: absolute;
   top: 10px;
   right: 5px;
 }
 .note .pinButton svg {
-  width: 32px;
-  height: 32px;
-}
-.note .removeButton {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 900;
-  font-size: 0.75rem;
   width: 24px;
   height: 24px;
-  border-radius: 50%;
-  background-color: red;
-  color: white;
+  fill: none;
+}
+.note .pinButton:hover svg {
+  fill: #000;
+  opacity: 0.5;
+}
+.note .pinButton.pinned svg {
+  width: 24px;
+  height: 24px;
+  fill: #000;
+}
+.note .pinButton.pinned:hover svg {
+  opacity: 0.5;
+}
+.note .removeButton, .note .modal .closeButton, .modal .note .closeButton {
+  position: absolute;
   left: -12px;
   top: -12px;
-  transition: filter 200ms;
-  filter: grayscale(1);
-  cursor: pointer;
-}
-.note .removeButton:hover {
-  filter: grayscale(0);
 }
 .note .content {
   padding-bottom: 20px;
@@ -238,6 +274,38 @@ table {
   left: 15px;
   color: gray;
   font-size: 0.75rem;
+}
+
+.modalWrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modalWrapper.hidden {
+  display: none;
+}
+
+.modal {
+  width: 500px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  background-color: #fff;
+  opacity: 1;
+  border-radius: 10px;
+  position: relative;
+}
+.modal .closeButton {
+  position: absolute;
+  right: 12px;
+  top: 12px;
 }
 
 /*# sourceMappingURL=index.css.map */

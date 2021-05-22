@@ -1,4 +1,4 @@
-import { App } from "./app";
-import "./css/index.css";
+import App from "./App";
 
 const app = new App();
+console.log("cujs");
