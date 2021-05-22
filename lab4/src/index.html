@@ -40,9 +40,23 @@
         <div class="modal">
           <button class="closeButton">X</button>
           <form id="note_form">
-            <!-- <input name="note_title" type="text" /> -->
-            <textarea name="note_content"></textarea>
-            <!-- <input name="note_title" type="color" /> -->
+            <input
+              placeholder="Tytuł..."
+              name="note_title"
+              type="text"
+              class="form_field"
+            />
+            <textarea
+              placeholder="Treść..."
+              name="note_content"
+              class="form_field"
+            ></textarea>
+            <input
+              id="colorPicker"
+              name="note_color"
+              type="color"
+              value="#FDE68A"
+            />
             <button>Dodaj notatkę</button>
           </form>
         </div>

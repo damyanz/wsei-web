@@ -13,14 +13,13 @@ class App {
     );
 
     this.addModalToggler();
-    this.modal = new Modal();
     this.notes = new Notes(notesWrapper, pinnedWrapper);
-    this.notes.add("Testowy tytuł", "Testowa treść", "#FDE68A");
+    this.modal = new Modal(this.notes.add);
+    this.modal.show();
   }
 
   addModalToggler() {
     const addButton = document.querySelector("#add_note");
-    console.log(addButton);
     addButton.addEventListener("click", () => {
       this.modal.show();
     });

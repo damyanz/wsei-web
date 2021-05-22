@@ -2,7 +2,7 @@
 
 $body: #334155;
 $shadow: " 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);";
-
+$lato: "Lato";
 button {
   border: none;
   background: none;
@@ -15,7 +15,7 @@ button {
   color: white;
   padding: 0;
   margin: 0;
-  font-family: "Lato";
+  font-family: $lato;
 }
 
 .main {
@@ -72,9 +72,10 @@ button {
 .notesWrapper {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-auto-flow: "row";
+  grid-auto-flow: row;
   gap: 15px;
   padding: 20px 0;
+  align-items: flex-start;
 }
 
 .removeButton {
@@ -151,6 +152,7 @@ button {
   .content {
     padding-bottom: 20px;
     line-height: 1.125rem;
+    word-break: break-all;
   }
 
   .info {
@@ -179,11 +181,9 @@ button {
 }
 
 .modal {
-  width: 500px;
-  height: 400px;
   display: flex;
   flex-direction: column;
-  padding: 30px;
+  padding: 45px 50px 20px 50px;
   background-color: #fff;
   opacity: 1;
   border-radius: 10px;
@@ -194,5 +194,46 @@ button {
     position: absolute;
     right: 12px;
     top: 12px;
+  }
+
+  #note_form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .form_field {
+      padding: 10px 15px;
+      border: 1px solid lightgray;
+      border-radius: 5px;
+      margin-bottom: 16px;
+      font-size: 1rem;
+      width: 100%;
+    }
+    textarea {
+      height: 150px;
+      font-family: $lato;
+    }
+
+    button {
+      display: inline-flex;
+      text-transform: uppercase;
+      background-color: #4338ca;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      color: white;
+      box-shadow: $shadow;
+      opacity: 0.5;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    #colorPicker {
+      margin-bottom: 16px;
+    }
   }
 }
