@@ -13,14 +13,14 @@ class Modal {
     this.onSave = onSave;
   }
 
-  addButtonListener() {
+  addButtonListener(): void {
     const closeButton = document.querySelector(".modal .closeButton");
     closeButton.addEventListener("click", () => {
       this.hide();
     });
   }
 
-  getFormElement = () => {
+  getFormElement = (): void => {
     this.form = document.querySelector("#note_form");
     this.form.addEventListener("submit", (e: Event) => {
       e.preventDefault();
@@ -28,14 +28,14 @@ class Modal {
     });
   };
 
-  resetValues() {
+  resetValues(): void {
     this.form.reset();
     this.title = "";
     this.content = "";
     this.color = "";
   }
 
-  getFormValues() {
+  getFormValues(): { title: string; content: string; color: string } {
     const data = new FormData(this.form);
     const title = data.get("note_title") as string;
     const content = data.get("note_content") as string;
@@ -43,7 +43,7 @@ class Modal {
     return { title, content, color };
   }
 
-  saveValues() {
+  saveValues(): void {
     const { title, content, color } = this.getFormValues();
     if (!title.length || !content.length) {
       alert("Tytuł oraz treść notatki nie mogą być puste!");
@@ -54,19 +54,18 @@ class Modal {
     this.color = color;
   }
 
-  handleAdd() {
+  handleAdd(): void {
     this.saveValues();
     if (this.title && this.content) {
-      console.log(this.title);
       this.onSave(this.title, this.content, this.color);
       this.hide();
     }
   }
 
-  hide() {
+  hide(): void {
     this.ref.parentElement.classList.add("hidden");
   }
-  show() {
+  show(): void {
     this.resetValues();
     this.ref.parentElement.classList.remove("hidden");
   }

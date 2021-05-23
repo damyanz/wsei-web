@@ -15,10 +15,12 @@ class App {
     this.addModalToggler();
     this.notes = new Notes(notesWrapper, pinnedWrapper);
     this.modal = new Modal(this.notes.add);
-    this.modal.show();
+    if (!Object.keys(this.notes.notes).length) {
+      this.modal.show();
+    }
   }
 
-  addModalToggler() {
+  addModalToggler(): void {
     const addButton = document.querySelector("#add_note");
     addButton.addEventListener("click", () => {
       this.modal.show();

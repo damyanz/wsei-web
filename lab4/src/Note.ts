@@ -1,5 +1,4 @@
 import { htmlToElement, pinIconHMTL } from "./helper";
-
 class Note {
   id: string;
   title: string;
@@ -15,13 +14,17 @@ class Note {
     content: string,
     color: string,
     onRemove: (id: string) => any,
-    onPin: (id: string) => any
+    onPin: (id: string) => any,
+    id?: string,
+    pinned?: boolean,
+    createdAt?: string
   ) {
-    this.id = `note_${Math.random().toString(36).substr(2, 9)}`;
+    this.id = id || `note_${Math.random().toString(36).substr(2, 9)}`;
     this.title = title;
     this.content = content;
     this.color = color;
-    this.createdAt = new Date();
+    this.createdAt = createdAt ? new Date(createdAt) : new Date();
+    this.pinned = !!pinned;
     this.onRemove = onRemove;
     this.onPin = onPin;
   }
@@ -49,7 +52,7 @@ class Note {
     return pinButton;
   }
 
-  createNoteElement() {
+  createNoteElement(): HTMLDivElement {
     const removeButton = this.createRemoveButton();
     const pinButton = this.createPinButton();
     const contentElement = this.getContentElement();
