@@ -72,7 +72,7 @@ class Note {
 
     return htmlToElement(`
     <div>
-        <h3 class="heading--note">
+        <h3 class="heading--note" title="${title}">
             ${title}
         </h3>
         <p class="content">

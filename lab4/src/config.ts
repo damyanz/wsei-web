@@ -2,10 +2,12 @@ import { Provider } from "./storage";
 
 type AppConfig = {
   storageProvider: Provider;
+  storageKey: string;
 };
 
 export const config: AppConfig = {
-  storageProvider: Provider.LocalStorage,
+  storageProvider: Provider.Firestore,
+  storageKey: "notes",
 };
 
 export const firebaseConfig = {

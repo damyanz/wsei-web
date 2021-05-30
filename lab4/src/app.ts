@@ -14,12 +14,23 @@ class App {
     );
 
     this.addModalToggler();
-    this.notes = new Notes(config.storageProvider, notesWrapper, pinnedWrapper);
-    this.modal = new Modal(this.notes.add);
-    if (!Object.keys(this.notes.notes).length) {
-      this.modal.show();
-    }
+    this.notes = new Notes(
+      config.storageProvider,
+      config.storageKey,
+      notesWrapper,
+      pinnedWrapper
+    );
+    this.handleModal();
   }
+
+  handleModal = async () => {
+    this.modal = new Modal(this.notes.add);
+    setTimeout(() => {
+      if (!Object.keys(this.notes.notes).length) {
+        this.modal.show();
+      }
+    }, 2000);
+  };
 
   addModalToggler(): void {
     const addButton = document.querySelector("#add_note");
