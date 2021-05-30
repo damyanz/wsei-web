@@ -1,10 +1,6 @@
-interface IStorage {
-  key: string;
-  saveNotes(obj: any): any;
-  getNotes(): any;
-}
+import { Storage } from "./storage";
 
-class AppStorage implements IStorage {
+class AppStorage implements Storage {
   key: string;
 
   constructor(key: string) {

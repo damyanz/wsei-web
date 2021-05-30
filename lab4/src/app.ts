@@ -1,3 +1,4 @@
+import { config } from "./config";
 import Modal from "./Modal";
 import Notes from "./Notes";
 class App {
@@ -13,7 +14,7 @@ class App {
     );
 
     this.addModalToggler();
-    this.notes = new Notes(notesWrapper, pinnedWrapper);
+    this.notes = new Notes(config.storageProvider, notesWrapper, pinnedWrapper);
     this.modal = new Modal(this.notes.add);
     if (!Object.keys(this.notes.notes).length) {
       this.modal.show();

@@ -1,23 +1,35 @@
+import { Provider } from "./storage";
 import Note from "./Note";
 import AppStorage from "./AppStorage";
-
+import AppFirestoreStorage from "./AppFirestoreStorage";
 class Notes {
   notes: { [id: string]: Note } = {};
   wrapper: HTMLElement;
   pinnedWrapper: HTMLElement;
   storage: AppStorage;
+  firestore: AppFirestoreStorage;
 
-  constructor(wrapper: HTMLElement, pinnedWrapper: HTMLElement) {
+  constructor(
+    storageProvider: Provider,
+    wrapper: HTMLElement,
+    pinnedWrapper: HTMLElement
+  ) {
     this.wrapper = wrapper;
     this.pinnedWrapper = pinnedWrapper;
+    this.firestore = new AppFirestoreStorage("notes");
     this.storage = new AppStorage("notes");
     this.restoreNotes();
     this.remove = this.remove.bind(this);
+    this.getNotesFromFirestore();
   }
+
+  getNotesFromFirestore = async () => {
+    const notes = await this.firestore.getNotes();
+    console.log(notes);
+  };
 
   restoreNotes = () => {
     const notes: any = this.storage.getNotes();
-    console.log(notes);
     if (notes) {
       Object.entries(notes).forEach(([_id, note]: any) => {
         const { id, title, content, color, pinned, createdAt } = note;
