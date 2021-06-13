@@ -7,5 +7,5 @@
     "target": "es6",
     "removeComments": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "__tests__/**/*"]
 }
