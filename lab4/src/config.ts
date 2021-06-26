@@ -6,7 +6,7 @@ type AppConfig = {
 };
 
 export const config: AppConfig = {
-  storageProvider: Provider.Firestore,
+  storageProvider: Provider.LocalStorage,
   storageKey: "notes",
 };
 

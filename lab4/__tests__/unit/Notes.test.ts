@@ -1,5 +1,9 @@
-import Notes from "../src/Notes";
-import { Provider } from "../src/storage";
+/**
+ * @jest-environment jsdom
+ */
+
+import Notes from "../../src/Notes";
+import { Provider } from "../../src/storage";
 
 describe("Notes", () => {
   const notes = new Notes(

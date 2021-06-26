@@ -1,6 +1,10 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import firebase from "firebase";
-import AppFirestoreStorage from "../src/AppFirestoreStorage";
-import Note from "../src/Note";
+import AppFirestoreStorage from "../../src/AppFirestoreStorage";
+import Note from "../../src/Note";
 
 const storage = new AppFirestoreStorage("storage_key");
 const note = new Note(

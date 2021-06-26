@@ -1,4 +1,8 @@
-import Note from "../src/Note";
+/**
+ * @jest-environment jsdom
+ */
+
+import Note from "../../src/Note";
 
 const note = new Note(
   "Tytuł notatki",
